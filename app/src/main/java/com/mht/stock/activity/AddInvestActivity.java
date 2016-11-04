@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -52,8 +53,15 @@ public class AddInvestActivity extends BaseActivity {
         setSupportActionBar(mBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        initView();
+    }
+
+    private void initView() {
+        mBinding.spinnerType.setAdapter(new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, android.R.id.text1, getResources().getStringArray(R.array.Type)));
         mBinding.etBuyDate.setText(DateUtils.dateToString(new Date(), DateUtils.FORMAT_YMD));
     }
+
+
 
     private float getMoney(EditText editText) {
         String money = editText.getText().toString();
