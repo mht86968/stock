@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="Type">
+        <item>现金</item>
+        <item>分红</item>
+        <item>买入</item>
+        <item>卖出</item>
+    </string-array>
+
+</resources>
