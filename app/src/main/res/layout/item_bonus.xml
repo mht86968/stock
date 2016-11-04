@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="model" type="com.mht.stock.model.BonusModel" />
+    </data>
+
+    <com.mht.stock.view.MyCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        style="@style/Card">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{model.bonusDate}"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{model.getInfo()}"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+    </com.mht.stock.view.MyCardView>
+</layout>
+
+

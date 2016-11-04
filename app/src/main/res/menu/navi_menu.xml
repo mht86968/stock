@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+        android:id="@+id/navCapitalAnalyze"
+        android:title="资产分析"/>
+        <item
+            android:id="@+id/navDeal"
+            android:title="股票"/>
+    </group>
+
+    <item android:title="在线查询">
+        <menu>
+            <item
+                android:id="@+id/nav_link1"
+                android:title="同花顺"/>
+            <item
+                android:id="@+id/nav_link2"
+                android:title="公司年报"/>
+        </menu>
+    </item>
+
+</menu>

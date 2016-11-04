@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="stock" type="com.mht.stock.model.StockModel" />
+    </data>
+
+    <com.mht.stock.view.MyCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        style="@style/Card">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvStockCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:textColor="@android:color/black"
+                android:text="@{stock.stockCode}" />
+
+            <TextView
+                android:id="@+id/tvCompanyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvStockCode"
+                android:textColor="@android:color/black"
+                android:text="@{stock.companyName}" />
+        </RelativeLayout>
+
+    </com.mht.stock.view.MyCardView>
+</layout>
+
+

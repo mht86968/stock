@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="lable_exit">再按一次返回键关闭程序</string>
+    <string name="lable_select_data">选择时间</string>
+
+    <string name="url_stock_detail">http://basic.10jqka.com.cn/%s/finance.html###</string>
+    <string name="url_ths">http://stock.10jqka.com.cn/</string>
+    <string name="url_annual_report">http://www.nbdqw.com/</string>
+
+    <string name="type_cash">现金</string>
+    <string name="type_stock">股票</string>
+    <string name="type_government">国债</string>
+    <string name="type_fund">基金</string>
+    <string name="type_government_back">国债逆回购</string>
+
+    <string name="btn_confirm">确认</string>
+    <string name="btn_cancel">取消</string>
+</resources>

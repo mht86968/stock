@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        style="@style/Content.Title"
+        android:padding="5dp"
+        android:text="股票"
+        app:layout_columnWeight="1" />
+
+    <TextView
+        android:id="@+id/tvYield"
+        style="@style/Content.Title"
+        android:padding="5dp"
+        android:text="0%"
+        app:layout_columnWeight="1" />
+
+    <TextView
+        android:id="@+id/tvMoney"
+        style="@style/Content.Title"
+        android:padding="5dp"
+        android:text="0"
+        app:layout_columnWeight="2" />
+
+</merge>

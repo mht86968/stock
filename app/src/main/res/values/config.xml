@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">Stock</string>
+
+    <string name="com.stack.host">http://titest.f3322.org:9090/</string>
+    <string name="com.stack.channel">WDJ</string>
+    <string name="logcat">true</string>
+</resources>
