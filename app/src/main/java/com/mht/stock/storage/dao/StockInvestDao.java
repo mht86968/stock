@@ -1,4 +1,4 @@
-package com.mht.stock.dao;
+package com.mht.stock.storage.dao;
 
 import android.content.Context;
 

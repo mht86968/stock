@@ -1,9 +1,7 @@
-package com.mht.stock.app.data;
+package com.mht.stock.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import com.mht.stock.R;
 
 /**
  * 用户数据
