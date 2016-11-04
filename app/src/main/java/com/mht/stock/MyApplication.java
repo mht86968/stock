@@ -2,7 +2,7 @@ package com.mht.stock;
 
 import android.app.Application;
 
-import com.mht.stock.app.data.UserStorage;
+import com.mht.stock.storage.UserStorage;
 import com.mht.stock.util.Configs;
 
 /**

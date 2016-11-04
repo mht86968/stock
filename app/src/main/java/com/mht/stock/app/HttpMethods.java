@@ -2,7 +2,8 @@ package com.mht.stock.app;
 
 import android.content.Context;
 
-import com.mht.stock.dao.StockDao;
+import com.mht.stock.storage.dao.StockDao;
+
 
 /**
  * Created by mht on 2016/4/10.
