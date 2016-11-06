@@ -1,5 +1,8 @@
 <resources>
 
+
+    <string name="title_add_invest">添加记录</string>
+
     <string name="lable_exit">再按一次返回键关闭程序</string>
     <string name="lable_select_data">选择时间</string>
 

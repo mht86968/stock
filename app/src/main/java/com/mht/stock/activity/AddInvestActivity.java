@@ -49,7 +49,7 @@ public class AddInvestActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_invest);
 
-        mBinding.toolbar.setTitle("添加记录");
+        mBinding.toolbar.setTitle(R.string.title_add_invest);
         setSupportActionBar(mBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -57,7 +57,6 @@ public class AddInvestActivity extends BaseActivity {
     }
 
     private void initView() {
-        mBinding.spinnerType.setAdapter(new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, android.R.id.text1, getResources().getStringArray(R.array.Type)));
         mBinding.etBuyDate.setText(DateUtils.dateToString(new Date(), DateUtils.FORMAT_YMD));
     }
 
