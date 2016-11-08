@@ -2,10 +2,10 @@
 <resources>
 
     <string-array name="Type">
-        <item>现金</item>
-        <item>分红</item>
-        <item>买入</item>
-        <item>卖出</item>
+        <item>@string/add_type_cash</item>
+        <item>@string/add_type_dividend</item>
+        <item>@string/add_type_buy</item>
+        <item>@string/add_type_sell</item>
     </string-array>
 
 </resources>

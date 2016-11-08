@@ -5,11 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -96,6 +96,46 @@ public class AddInvestActivity extends BaseActivity {
         }
     }
 
+    private void onStockClick(View view) {
+        SelectStockActivity.toActivityForResult(this, REQUEST_SELECT_STOCK);
+    }
+
+
+    private void requestSaveCash() {
+        Editable cash = mBinding.etCashMoney.getText();
+        if(TextUtils.isEmpty(cash)) {
+            showToast(getString(R.string.msg_error_cash));
+            return ;
+        }
+        int checkedRadioButtonId = mBinding.rgroupBankStock.getCheckedRadioButtonId();
+        if(checkedRadioButtonId == R.id.rbtnBankToStock) {
+
+        } else if(checkedRadioButtonId == R.id.rbtnStockToBank) {
+
+        }
+    }
+
+    /**
+     * 保存
+     */
+    private void requestSave() {
+        Object select = mBinding.spinnerType.getSelectedItem();
+        if(getString(R.string.add_type_cash).equals(select)) {
+            requestSaveCash();
+        } else if(getString(R.string.add_type_dividend).equals(select)) {
+
+        } else if(getString(R.string.add_type_buy).equals(select)) {
+
+        } else if(getString(R.string.add_type_sell).equals(select)) {
+
+        }
+    }
+
+
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add_invest, menu);
@@ -105,7 +145,7 @@ public class AddInvestActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(R.id.menu_save == item.getItemId()) {
-            CommonUtils.showToast(mContext, "nihai");
+            requestSave();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -118,9 +158,5 @@ public class AddInvestActivity extends BaseActivity {
                 stockModel = (StockModel) data.getSerializableExtra(Constants.PARAM);
             }
         }
-    }
-
-    private void onStockClick(View view) {
-        SelectStockActivity.toActivityForResult(this, REQUEST_SELECT_STOCK);
     }
 }

@@ -16,6 +16,14 @@
     <string name="type_fund">基金</string>
     <string name="type_government_back">国债逆回购</string>
 
+
+    <string name="add_type_cash">现金</string>
+    <string name="add_type_dividend">分红</string>
+    <string name="add_type_buy">买入</string>
+    <string name="add_type_sell">卖出</string>
+
     <string name="btn_confirm">确认</string>
     <string name="btn_cancel">取消</string>
+
+    <string name="msg_error_cash">请输入金额！</string>
 </resources>
