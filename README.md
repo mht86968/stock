@@ -1,21 +1,19 @@
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
-git clone	ÏÂÔØÏîÄ¿
-git add .	Ìí¼ÓËùÓĞĞŞ¸Ä
-git rm		É¾³ı
-git rm -rf  É¾³ıÎÄ¼ş¼Ğ
-git diff	²é¿´²»Í¬
+git clone	å…‹éš†ç‰ˆæœ¬åº“
+git add .	æ·»åŠ æ‰€æœ‰æ”¹å˜
+git rm		åˆ é™¤æ–‡ä»¶
+git rm -rf  åˆ é™¤æ–‡ä»¶å¤¹
+git diff	æ¯”è¾ƒä¸åŒ
 
-git commit -m				Ìá½»
-git push -u origin master	Ìá½»µ½Ô¶³Ì·şÎñÆ÷
-git push					Ìá½»µ½Ô¶³Ì·şÎñÆ÷
-git pull 					¸üĞÂÔ¶¶Ë·şÎñÆ÷×îĞÂ°æ
+git commit -m				æäº¤æ”¹å˜
+git push -u origin master	æäº¤åˆ°è¿œç¨‹æœåŠ¡å™¨
+git push					æäº¤åˆ°è¿œç¨‹æœåŠ¡å™¨
+git pull 					æ›´æ–°è¿œç¨‹æœåŠ¡å™¨
 
-git branch				²é¿´·ÖÖ§
-git branch branchname	ĞÂ½¨·ÖÖ§
-git branch -d newbranch	É¾³ı·ÖÖ§
-git checkout branchname	ÇĞ»»·ÖÖ§
-git merge branchname	ºÏ²¢·ÖÖ§
-
-git diff	²é¿´²»Í¬
+git branch				æŸ¥çœ‹åˆ†æ”¯
+git branch branchname	æ–°å»ºåˆ†æ”¯
+git branch -d newbranch	åˆ é™¤åˆ†æ”¯
+git checkout branchname	åˆ‡æ¢åˆ†æ”¯
+git merge branchname	åˆå¹¶åˆ†æ”¯
