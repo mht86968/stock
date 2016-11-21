@@ -3,7 +3,6 @@ package com.mht.stock;
 import android.app.Application;
 
 import com.mht.stock.storage.UserStorage;
-import com.mht.stock.util.Configs;
 
 /**
  * Created by mht on 2016/4/8.

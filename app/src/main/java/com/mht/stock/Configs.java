@@ -1,8 +1,6 @@
-package com.mht.stock.util;
+package com.mht.stock;
 
 import android.content.Context;
-
-import com.mht.stock.R;
 
 public class Configs {
 
