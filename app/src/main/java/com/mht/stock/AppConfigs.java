@@ -2,20 +2,20 @@ package com.mht.stock;
 
 import android.content.Context;
 
-public class Configs {
+public class AppConfigs {
 
-	protected static Configs sConfigs;
+	protected static AppConfigs sConfigs;
 
 	private String mHost;
 	private String mChannel;
 	private boolean mLogcat;
 
-	public static Configs instance() {
+	public static AppConfigs instance() {
 		return sConfigs;
 	}
 
 	public static void init(Context context){
-		sConfigs = new Configs();
+		sConfigs = new AppConfigs();
 		sConfigs.inter_init(context);		
 	}
 

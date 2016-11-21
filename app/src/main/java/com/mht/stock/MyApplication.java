@@ -13,7 +13,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Configs.init(this);
+        AppConfigs.init(this);
         UserStorage.init(this);
     }
 }
