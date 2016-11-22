@@ -1,6 +1,5 @@
 package com.mht.stock;
 
-import android.app.Activity;
 import android.app.Application;
 
 import com.mht.stock.storage.UserStorage;
@@ -19,8 +18,8 @@ public class MyApplication extends Application {
         handler.init(this);
 
         MyLog.DEBUG = AppConfigs.instance().isLogcat();
-
         AppConfigs.init(this);
+
         UserStorage.init(this);
     }
 
@@ -35,17 +34,5 @@ public class MyApplication extends Application {
     }
 
     public void toMainActivity() {
-    }
-
-    /**
-     * app移动到后台运行
-     * @param activity
-     */
-    public void moveAppTaskToBack(Activity activity) {
-//        Intent intent = new Intent(Intent.ACTION_MAIN);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        intent.addCategory(Intent.CATEGORY_HOME);
-//        startActivity(intent);
-        activity.moveTaskToBack(true);
     }
 }

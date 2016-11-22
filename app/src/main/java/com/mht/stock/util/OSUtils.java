@@ -23,6 +23,7 @@ public class OSUtils {
         return isPropertiesExist(KEY_EMUI_VERSION_CODE);
     }
 
+    //低版本，判断错误
     public static boolean isMIUI() {
         return isPropertiesExist(KEY_MIUI_VERSION_CODE, KEY_MIUI_VERSION_NAME, KEY_MIUI_INTERNAL_STORAGE);
     }

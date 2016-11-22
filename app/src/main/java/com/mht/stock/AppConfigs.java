@@ -19,7 +19,7 @@ public class AppConfigs {
 
 	public static void init(Context context){
 		sConfigs = new AppConfigs();
-		sConfigs.inter_init(context);		
+		sConfigs.inter_init(context);
 	}
 
 	private void inter_init(Context context){
