@@ -1,6 +1,6 @@
 package com.mht.stock.http;
 
-import com.mht.stock.app.AppException;
+import com.mht.stock.AppException;
 import com.mht.stock.constant.Constants;
 import com.mht.stock.util.JSONUtils;
 

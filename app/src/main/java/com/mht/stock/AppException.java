@@ -1,4 +1,4 @@
-package com.mht.stock.app;
+package com.mht.stock;
 
 import android.content.Context;
 
@@ -6,6 +6,7 @@ import android.content.Context;
  * Created by mht on 2016/5/17.
  */
 public class AppException extends Exception {
+
     public static final int ERROR_NETWORK = 1;          //网络出错
     public static final int ERROR_HTTP_PARAMS = 2;      //http 参数错误
 
