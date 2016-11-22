@@ -11,10 +11,11 @@ git 放弃本地修改 强制更新
 git fetch --all
 git reset --hard origin/master
 
+git pull 					更新远程服务器
+
 git commit -m				提交改变
 git push -u origin master	提交到远程服务器
 git push					提交到远程服务器
-git pull 					更新远程服务器
 
 git branch				查看分支
 git branch branchname	新建分支
