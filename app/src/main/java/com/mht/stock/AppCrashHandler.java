@@ -1,8 +1,16 @@
 package com.mht.stock;
 
 import android.content.Context;
-import android.os.Looper;
-import android.widget.Toast;
+import android.util.Log;
+
+import com.mht.stock.activity.TransActivity;
+import com.mht.stock.util.CommonUtils;
+import com.mht.stock.util.DateUtils;
+import com.mht.stock.util.FileUtils;
+import com.mht.stock.util.IO;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by JuQiu
@@ -39,27 +47,27 @@ public class AppCrashHandler implements Thread.UncaughtExceptionHandler {
         }
     }
 
-    private boolean handleException(Throwable ex) {
+    private boolean handleException(final Throwable ex) {
         if (ex == null) {
             return false;
         }
         ex.printStackTrace();
+        TransActivity.showDialogSystemError(mContext);
 
-        new Thread() {
-            @Override
-            public void run() {
-                Looper.prepare();
-                Toast.makeText(mContext, "OSC出现未知异常,即将退出.", Toast.LENGTH_LONG).show();
-                Looper.loop();
+        File errorDir = FileUtils.getErrorCacheDir(mContext);
+        if(errorDir != null) {
+            try {
+                final String errorInfo = String.format("手机型号：%s\nAndroid系统：Android %s\nApp版本号：%s\n\n%s",
+                        android.os.Build.MODEL,
+                        android.os.Build.VERSION.RELEASE,
+                        CommonUtils.getVersionName(mContext),
+                        Log.getStackTraceString(ex));
+
+                IO.write(errorInfo, new File(errorDir, String.format("%s.log", DateUtils.getNowDate(DateUtils.FORMAT_YMDHMS))));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }.start();
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
-
         return true;
     }
 }

@@ -14,4 +14,5 @@ public class Constants {
     public static final String PARAM = "param";
     public static final String PARAM_TITLE = "param_title";
     public static final String PARAM_URL = "param_url";
+    public static final String PARAM_TYPE = "param_type";
 }

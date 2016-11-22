@@ -23,6 +23,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.TransActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity
             android:name=".activity.StockDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity

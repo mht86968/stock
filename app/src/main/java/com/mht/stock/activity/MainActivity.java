@@ -42,6 +42,8 @@ public class MainActivity extends BaseActivity {
         setupDrawerContent(mBinding.navView);
 
         replaceFragment(R.id.layoutMain, getTypeFragment(MainFragment.TAG));
+
+        int i = 4/0;
     }
 
 

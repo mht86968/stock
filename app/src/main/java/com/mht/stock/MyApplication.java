@@ -17,7 +17,8 @@ public class MyApplication extends Application {
         AppCrashHandler handler = AppCrashHandler.getInstance();
         handler.init(this);
 
-        MyLog.DEBUG = AppConfigs.instance().isLogcat();
+//        MyLog.DEBUG = AppConfigs.instance().isLogcat();
+        MyLog.DEBUG = true;
         AppConfigs.init(this);
 
         UserStorage.init(this);

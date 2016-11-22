@@ -98,28 +98,41 @@ public class FileUtils {
     }
 
 	public static File getDownloadCacheDir(Context context) {
-		File f = new File(getAppCacheDir(context), "download");
-		if (!f.exists()) {
-			f.mkdirs();
+		File file = new File(getAppCacheDir(context), "download");
+		if (!file.exists()) {
+            file.mkdirs();
 		}
-		return f;
+		return file;
 	}
 
 	public static File getImageCacheDir(Context context) {
-		File f = new File(getAppCacheDir(context), "images");
-		if (!f.exists()) {
-			f.mkdirs();
+		File file = new File(getAppCacheDir(context), "images");
+		if (!file.exists()) {
+            file.mkdirs();
 		}
-		return f;
+		return file;
 	}
 
 	public static File getUpdateCacheDir(Context context) {
-		File f = new File(getAppCacheDir(context), "update");
-		if (!f.exists()) {
-			f.mkdirs();
+		File file = new File(getAppCacheDir(context), "update");
+		if (!file.exists()) {
+            file.mkdirs();
 		}
-		return f;
+		return file;
 	}
+
+    public static File getErrorCacheDir(Context context) {
+        if(isAvailableSdcard()) {
+            File cacheDir = getExternalCacheDir(context);
+            File file = new File(cacheDir, "error");
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            return file;
+        } else {
+            return null;
+        }
+    }
 
 
 
