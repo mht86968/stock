@@ -17,10 +17,31 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by mht on 2016/3/22.
  */
 public class CommonUtils {
+
+    public static boolean isChinese(String str){
+        Pattern p = Pattern.compile("^[\u4e00-\u9fa5]{2,6}$");
+        Matcher m = p.matcher(str);
+        if(m.find()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static String getHttpUrl(String url) {
+        if(url == null || url.startsWith("http")) {
+            return url;
+        } else {
+            return "http://" + url;
+        }
+    }
 
     public static Toast showToast(Context context, String text) {
         Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
@@ -90,11 +111,8 @@ public class CommonUtils {
     }
 
     public static void openUrl(Context context, String url) {
-        if (url != null && !url.startsWith("http://")) {
-            url = "http://" + url;
-        }
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
+        intent.setData(Uri.parse(getHttpUrl(url)));
         context.startActivity(intent);
     }
 
