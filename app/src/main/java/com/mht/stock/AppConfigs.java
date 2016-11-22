@@ -1,6 +1,9 @@
 package com.mht.stock;
 
 import android.content.Context;
+import android.os.Environment;
+
+import java.io.File;
 
 public class AppConfigs {
 
@@ -36,4 +39,22 @@ public class AppConfigs {
 	public boolean isLogcat() {
 		return mLogcat;
 	}
+
+
+
+    public String getSaveImagePath() {
+        return Environment
+                .getExternalStorageDirectory()
+                + File.separator
+                + "stock"
+                + File.separator + "images" + File.separator;
+    }
+
+    public String getSaveFilePath() {
+        return Environment
+                .getExternalStorageDirectory()
+                + File.separator
+                + "stock"
+                + File.separator + "file" + File.separator;
+    }
 }
