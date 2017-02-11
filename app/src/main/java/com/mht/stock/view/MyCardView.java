@@ -11,10 +11,6 @@ import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Build;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
-import android.util.Log;
-
-import com.mht.stock.util.CommonUtils;
-import com.mht.stock.util.Screen;
 
 /**
  * Created by mht on 2016/6/29.

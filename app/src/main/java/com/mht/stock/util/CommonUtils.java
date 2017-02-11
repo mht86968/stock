@@ -1,5 +1,6 @@
 package com.mht.stock.util;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,8 @@ import android.graphics.Rect;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.IBinder;
 import android.support.design.widget.Snackbar;
 import android.telephony.TelephonyManager;
@@ -17,6 +20,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.mht.stock.MyApplication;
+
+import java.net.NetworkInterface;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -91,28 +99,15 @@ public class CommonUtils {
         }
     }
 
-    public static int getStatusBarHight(Activity activity) {
-        Rect frame = new Rect();
-        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-        return frame.top;
-    }
-
-    public static int getStatusBarHeight(Context context) {
-        Resources resources = context.getResources();
-        int resourceId = resources .getIdentifier("status_bar_height", "dimen", "android");
-        return resources.getDimensionPixelSize(resourceId);
-    }
-
-    public static void installApk(Context context, String path) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.parse("file://" + path),
-                "application/vnd.android.package-archive");
-        context.startActivity(intent);
-    }
 
     public static void openUrl(Context context, String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(getHttpUrl(url)));
+        context.startActivity(intent);
+    }
+
+    public static void callPhone(Context context, String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNum));
         context.startActivity(intent);
     }
 
@@ -140,28 +135,6 @@ public class CommonUtils {
         }
     }
 
-    public static String getVersionName(Context context) {
-        PackageManager packageManager = context.getPackageManager();
-        try {
-            PackageInfo packInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
-            return packInfo.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static int getVersionCode(Context context) {
-        PackageManager packageManager = context.getPackageManager();
-        try {
-            PackageInfo packInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
-            return packInfo.versionCode;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
     /**
      * 获取设备唯一编号
      *
@@ -173,8 +146,4 @@ public class CommonUtils {
         return tm.getDeviceId();
     }
 
-    public static void callPhone(Context context, String phoneNum) {
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNum));
-        context.startActivity(intent);
-    }
 }

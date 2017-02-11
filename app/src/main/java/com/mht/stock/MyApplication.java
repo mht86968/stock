@@ -10,30 +10,24 @@ import com.mht.stock.util.MyLog;
  */
 public class MyApplication extends Application {
 
+    private static MyApplication mApplication;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
-        AppCrashHandler handler = AppCrashHandler.getInstance();
-        handler.init(this);
+        mApplication = this;
+
+        AppCrash.getInstance().init();
 
 //        MyLog.DEBUG = AppConfigs.instance().isLogcat();
-        MyLog.DEBUG = true;
+        MyLog.init(this);
         AppConfigs.init(this);
 
         UserStorage.init(this);
     }
 
-    public void login() {
-    }
-
-    public void logout() {
-    }
-
-    public boolean isLogin() {
-        return true;
-    }
-
-    public void toMainActivity() {
+    public static MyApplication getApplication() {
+        return mApplication;
     }
 }

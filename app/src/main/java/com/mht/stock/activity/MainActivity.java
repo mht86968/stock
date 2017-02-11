@@ -16,11 +16,13 @@ import com.mht.stock.fragment.AllStockFragment;
 import com.mht.stock.fragment.BonusFragment;
 import com.mht.stock.fragment.MainFragment;
 import com.mht.stock.util.CommonUtils;
+import com.mht.stock.util.MyLog;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends BaseActivity {
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final int REQUEST_ADD_INVEST = 1;
 
@@ -38,12 +40,12 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
+        MyLog.d(TAG, "MainActivity create");
+
         setSupportActionBar(mBinding.toolbar);
         setupDrawerContent(mBinding.navView);
 
         replaceFragment(R.id.layoutMain, getTypeFragment(MainFragment.TAG));
-
-        int i = 4/0;
     }
 
 

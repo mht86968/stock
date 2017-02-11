@@ -41,16 +41,6 @@ public class ViewUtils {
         }
     }
 
-	/**
-	 * 截屏
-	 * @param view
-	 * @return
-	 */
-	public static Bitmap viewToBitmap(View view) {
-		Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-		view.draw(new Canvas(bitmap));
-		return bitmap;
-	}
 
 	// 去掉ZoomControl 放大缩小按钮
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)

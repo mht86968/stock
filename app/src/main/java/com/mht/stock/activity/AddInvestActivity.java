@@ -21,6 +21,7 @@ import com.mht.stock.model.CashModel;
 import com.mht.stock.model.StockModel;
 import com.mht.stock.util.CommonUtils;
 import com.mht.stock.util.DateUtils;
+import com.mht.stock.util.EncryptUtils;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -127,7 +128,6 @@ public class AddInvestActivity extends BaseActivity {
         } else if(getString(R.string.add_type_buy).equals(select)) {
 
         } else if(getString(R.string.add_type_sell).equals(select)) {
-
         }
     }
 

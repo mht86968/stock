@@ -61,7 +61,7 @@ public class BaseActivity extends AppCompatActivity {
         if(isToBackStack) {
             transaction.addToBackStack(null);
         }
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     protected void replaceFragment(int layoutId, Fragment fragment) {

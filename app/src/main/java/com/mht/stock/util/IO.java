@@ -9,6 +9,7 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,24 +28,7 @@ public final class IO {
     public static final int BUFFER = 8 * 1024;
     public static final int UPDATE_BLOCK = 512 * 1024;
 
-    public static void write(String content, File file) throws IOException {
-        Writer writer = IO.createWriter(file);
-        try {
-            writer.write(content);
-        } finally {
-            writer.close();
-        }
-    }
 
-    public static void write(String content, OutputStream outputStream) throws IOException {
-        Writer writer = new OutputStreamWriter(outputStream);
-        try {
-            writer.write(content);
-        } finally {
-            writer.close();
-        }
-    }
-    
     public static String readAsString(File in) throws IOException {
         return new String(IO.readAsBytes(in), Constants.UTF8);
     }
@@ -52,7 +36,7 @@ public final class IO {
     public static String readAsString(InputStream in) throws IOException {
         return new String(IO.readAsBytes(in), Constants.UTF8);
     }
-    
+
     public static byte[] readAsBytes(File in) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         copy(IO.createInputStream(in), out);
@@ -66,25 +50,61 @@ public final class IO {
     }
 
 
-    public static void copy(Bitmap bitmap, File outFile) throws IOException {
-    	BufferedOutputStream out = IO.createOutputStream(outFile);
-    	bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-    	out.flush();
-    	out.close();
+
+    /**
+     *
+     * @param content
+     * @param file
+     * @param append    是否追加在文件末
+     * @throws IOException
+     */
+    public static void write(String content, File file, boolean append) throws IOException {
+        Writer writer = IO.createWriter(file, append);
+        try {
+            writer.write(content);
+        } finally {
+            closeIO(writer);
+        }
+    }
+
+    public static void write(String content, OutputStream outputStream) throws IOException {
+        Writer writer = new OutputStreamWriter(outputStream);
+        try {
+            writer.write(content);
+        } finally {
+            closeIO(writer);
+        }
+    }
+
+
+
+
+    public static void copy(Bitmap in, File out) throws IOException {
+    	BufferedOutputStream outputStream = IO.createOutputStream(out, false);
+        in.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        outputStream.flush();
+        closeIO(outputStream);
+    }
+
+    /**
+     * 复制
+     * @param in
+     * @param out
+     * @param append        true：添加到文件末尾，false：复制替换文件
+     * @throws IOException
+     */
+    public static void copy(File in, File out, boolean append) throws IOException {
+        copy(IO.createInputStream(in), IO.createOutputStream(out, append));
+    }
+
+    public static void copy(File in, OutputStream out) throws IOException {
+        copy(IO.createInputStream(in), out);
     }
     
-    public static void copy(File inFile, File outFile) throws IOException {
-        copy(IO.createInputStream(inFile), IO.createOutputStream(outFile));
+    public static void copy(InputStream in, File out, boolean append) throws IOException {
+        copy(in, IO.createOutputStream(out, append));
     }
-    
-    public static void copy(File inFile, OutputStream out) throws IOException {
-        copy(IO.createInputStream(inFile), out);
-    }
-    
-    public static void copy(InputStream in, File outFile) throws IOException {
-        copy(in, IO.createOutputStream(outFile));
-    }
-    
+
     public static void copy(InputStream in, OutputStream out) throws IOException {
         byte[] bytes = new byte[BUFFER];
         int len;
@@ -93,8 +113,7 @@ public final class IO {
                 out.write(bytes, 0, len);
             }
         } finally {
-            in.close();
-            out.close();
+            closeIO(in, out);
         }
     }
     
@@ -118,27 +137,51 @@ public final class IO {
             	progress.onProgress(download);
             }
         } finally {
-            in.close();
-            out.close();
+            closeIO(in, out);
         }
     }
 
-    
-    public static Reader createReader(File file) throws FileNotFoundException {
-        return new BufferedReader(new FileReader(file));
+
+
+
+
+    /**
+     * 关闭IO
+     *
+     * @param closeables closeable
+     */
+    public static void closeIO(Closeable... closeables) {
+        if (closeables == null) return;
+        for (Closeable closeable : closeables) {
+            if (closeable != null) {
+                try {
+                    closeable.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
-    public static Writer createWriter(File file) throws IOException {
-        return new BufferedWriter(new FileWriter(file));
+
+
+    public static BufferedReader createReader(File in) throws FileNotFoundException {
+        return new BufferedReader(new FileReader(in));
     }
 
-    public static BufferedOutputStream createOutputStream(File file) throws FileNotFoundException {
-        return new BufferedOutputStream(new FileOutputStream(file));
+    public static BufferedWriter createWriter(File out, boolean append) throws IOException {
+        return new BufferedWriter(new FileWriter(out, append));
     }
 
-    public static BufferedInputStream createInputStream(File file) throws FileNotFoundException {
-        return new BufferedInputStream(new FileInputStream(file));
+    public static BufferedOutputStream createOutputStream(File out, boolean append) throws FileNotFoundException {
+        return new BufferedOutputStream(new FileOutputStream(out, append));
     }
+
+    public static BufferedInputStream createInputStream(File in) throws FileNotFoundException {
+        return new BufferedInputStream(new FileInputStream(in));
+    }
+
+
 
     
     public static interface Progress {

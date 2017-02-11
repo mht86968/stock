@@ -2,6 +2,7 @@ package com.mht.stock.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.content.SharedPreferencesCompat;
 
 import com.mht.stock.util.JSONUtils;
 
@@ -14,9 +15,9 @@ public class Preferences {
         return sPreferences;
     }
 
-    public static void init(Context context) {
+    public static void init(Context context, String name) {
         sPreferences = new Preferences();
-        sPreferences.mPreferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE);
+        sPreferences.mPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE);
     }
 
 
@@ -103,12 +104,12 @@ public class Preferences {
         SharedPreferences.Editor editor = mPreferences.edit();
         for (String k : key)
             editor.remove(k);
-        editor.commit();
+        SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
     }
 
     public void clear() {
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.clear();
-        editor.commit();
+        SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
     }
 }
