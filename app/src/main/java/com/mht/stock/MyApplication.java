@@ -20,7 +20,6 @@ public class MyApplication extends Application {
 
         AppCrash.getInstance().init();
 
-//        MyLog.DEBUG = AppConfigs.instance().isLogcat();
         MyLog.init(this);
         AppConfigs.init(this);
 
