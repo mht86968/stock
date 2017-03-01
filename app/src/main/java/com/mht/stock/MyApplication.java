@@ -2,7 +2,6 @@ package com.mht.stock;
 
 import android.app.Application;
 
-import com.mht.stock.storage.UserStorage;
 import com.mht.stock.util.MyLog;
 
 /**
@@ -10,23 +9,19 @@ import com.mht.stock.util.MyLog;
  */
 public class MyApplication extends Application {
 
-    private static MyApplication mApplication;
+    private static MyApplication singleton;
+
+    public static MyApplication getApplication() {
+        return singleton;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        singleton = this;
 
-        mApplication = this;
-
-        AppCrash.getInstance().init();
-
-        MyLog.init(this);
-        AppConfigs.init(this);
-
-        UserStorage.init(this);
-    }
-
-    public static MyApplication getApplication() {
-        return mApplication;
+        AppConfigs.instance().init(this);
+        AppCrash.instance().init(AppCache.instance());
+        MyLog.init(AppCache.instance(), AppConfigs.instance());
     }
 }

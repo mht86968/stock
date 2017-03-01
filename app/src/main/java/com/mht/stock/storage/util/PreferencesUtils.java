@@ -1,4 +1,4 @@
-package com.mht.stock.storage;
+package com.mht.stock.storage.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,20 +6,13 @@ import android.support.v4.content.SharedPreferencesCompat;
 
 import com.mht.stock.util.JSONUtils;
 
-public class Preferences {
+public class PreferencesUtils {
 
-    private static Preferences sPreferences;
     private SharedPreferences mPreferences;
 
-    public static Preferences instance() {
-        return sPreferences;
+    public PreferencesUtils(Context context, String name) {
+        mPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE);
     }
-
-    public static void init(Context context, String name) {
-        sPreferences = new Preferences();
-        sPreferences.mPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE);
-    }
-
 
 
 

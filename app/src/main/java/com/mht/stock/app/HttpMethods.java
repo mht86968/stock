@@ -12,16 +12,15 @@ public class HttpMethods {
     public static final String TAG = "HttpMethods";
 
     private static HttpMethods mInstance;
+    private Context mContext;
+    private StockDao mStockDao;
 
-    public static HttpMethods getInstance(Context context) {
+    public static HttpMethods instance(Context context) {
         if(mInstance == null) {
             mInstance = new HttpMethods(context);
         }
         return mInstance;
     }
-
-    private Context mContext;
-    private StockDao mStockDao;
 
     private HttpMethods(Context context) {
         mContext = context;

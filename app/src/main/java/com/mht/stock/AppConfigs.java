@@ -1,35 +1,55 @@
 package com.mht.stock;
 
 import android.content.Context;
-import android.os.Environment;
 
-import java.io.File;
+import com.mht.stock.storage.UserStorage;
 
 public class AppConfigs {
 
-	protected static AppConfigs sConfigs;
+	private static AppConfigs singleton;
 
 	private String mHost;
+	private String mWebHost;
 	private String mChannel;
 	private boolean mLogcat;
+	private boolean mLogcatToFile;
+
+	private AppConfigs() {
+	}
 
 	public static AppConfigs instance() {
-		return sConfigs;
+		if(singleton == null) {
+			synchronized (UserStorage.class) {
+				if(singleton == null) {
+					singleton = new AppConfigs();
+				}
+			}
+		}
+		return singleton;
 	}
 
-	public static void init(Context context){
-		sConfigs = new AppConfigs();
-		sConfigs.inter_init(context);
-	}
-
-	private void inter_init(Context context){
+	public void init(Context context) {
 		mChannel = context.getString(R.string.com_stack_channel);
 		mHost = context.getString(R.string.com_stack_host);
+		mWebHost = context.getString(R.string.com_stack_host_web);
 		mLogcat = Boolean.parseBoolean(context.getString(R.string.logcat));
+		mLogcatToFile = Boolean.parseBoolean(context.getString(R.string.logcat_to_file));
 	}
 
 	public String getHost() {
 		return mHost;
+	}
+
+	public String getWebHost() {
+		return mWebHost;
+	}
+
+	public String getUrl(String url) {
+		return mHost + url;
+	}
+
+	public String getWebUrl(String url) {
+		return mWebHost + url;
 	}
 
 	public String getChannel() {
@@ -40,21 +60,7 @@ public class AppConfigs {
 		return mLogcat;
 	}
 
-
-
-    public String getSaveImagePath() {
-        return Environment
-                .getExternalStorageDirectory()
-                + File.separator
-                + "stock"
-                + File.separator + "images" + File.separator;
-    }
-
-    public String getSaveFilePath() {
-        return Environment
-                .getExternalStorageDirectory()
-                + File.separator
-                + "stock"
-                + File.separator + "file" + File.separator;
-    }
+	public boolean isLogcatToFile() {
+		return mLogcatToFile;
+	}
 }

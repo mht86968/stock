@@ -1,26 +1,35 @@
 package com.mht.stock.storage;
 
 import android.content.Context;
-import android.content.SharedPreferences;
+
+import com.mht.stock.MyApplication;
+import com.mht.stock.storage.util.PreferencesUtils;
 
 /**
  * 用户数据
  */
 public class UserStorage {
 
-    private static UserStorage sUserStorage;
-    private SharedPreferences mPreferences;
+    private static UserStorage singleton;
+    private PreferencesUtils mPreferences;
 
     private UserStorage() {
     }
 
-    public static void init(Context context) {
-        sUserStorage = new UserStorage();
-        sUserStorage._init(context);
+    public static UserStorage instance() {
+        if(singleton == null) {
+            synchronized (UserStorage.class) {
+                if(singleton == null) {
+                    singleton = new UserStorage();
+                    singleton.init(MyApplication.getApplication());
+                }
+            }
+        }
+        return singleton;
     }
 
-    private void _init(Context context) {
-        mPreferences = context.getSharedPreferences("user_preferences", Context.MODE_PRIVATE);
+    private void init(Context context) {
+        mPreferences = new PreferencesUtils(context, "user_preferences");
     }
 
     public void login() {

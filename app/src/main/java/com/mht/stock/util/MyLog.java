@@ -1,8 +1,9 @@
 package com.mht.stock.util;
 
-import android.content.Context;
-import android.os.Environment;
 import android.util.Log;
+
+import com.mht.stock.AppCache;
+import com.mht.stock.AppConfigs;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,22 +16,16 @@ import java.util.concurrent.Executors;
 public class MyLog {
 	
 	private static final String LOG_HEADE = "Stock_";
-    private static boolean DEBUG = false;
-    private static boolean LOG_TO_FILE = false;
-    private static String dir;
+    private static boolean sDebug = false;
+    private static boolean sLogToFile = false;
+    private static File mDir;
 
     private static Executor mExecutor;
 
-    public static void init(Context context) {
-        DEBUG = true;
-        LOG_TO_FILE = true;
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            dir = context.getExternalCacheDir().getPath() + File.separator + "log" + File.separator;
-        } else {
-            dir = context.getCacheDir().getPath() + File.separator + "log" + File.separator;
-        }
-
-        if(DEBUG && LOG_TO_FILE) {
+    public static void init(AppCache appCache, AppConfigs configs) {
+        mDir = appCache.getLogCache();
+        sLogToFile = configs.isLogcatToFile();
+        if(sDebug && sLogToFile) {
             mExecutor = Executors.newSingleThreadExecutor();
         }
     }
@@ -97,7 +92,7 @@ public class MyLog {
     }
 
     private static final void doLog(char level, String tag, String msg, Throwable tr) {
-        if (DEBUG && msg!=null) {
+        if (sDebug && msg!=null) {
             msg = msg + '\n' + Log.getStackTraceString(tr);
 
             final int maxLen = 4000;
@@ -124,7 +119,7 @@ public class MyLog {
                 }
             }
 
-            if(LOG_TO_FILE) {
+            if(sLogToFile) {
                 log2File(level, tag, msg, tr);
             }
         }
@@ -138,23 +133,24 @@ public class MyLog {
      * @param tag   标签
      * @param msg   信息
      **/
-    private synchronized static void log2File(final char level, final String tag, final String msg, Throwable e) {
+    private synchronized static void log2File(final char level, final String tag, final String msg, Throwable tr) {
         Date now = new Date();
         String date = new SimpleDateFormat("MM-dd", Locale.getDefault()).format(now);
-        final String fullPath = dir + date + ".txt";
+        final File fullPath = new File(mDir, date + ".txt");
         if (!FileUtils.createOrExistsFile(fullPath)) return;
         String time = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault()).format(now);
-        final String dateLogContent = new StringBuffer(time).append(":")
+        final StringBuffer dateLogContent = new StringBuffer(time).append(":")
                 .append(level).append(":")
                 .append(tag).append(":")
-                .append(msg).append("\n")
-                .append(Log.getStackTraceString(e)).append("\n").toString();
-
+                .append(msg).append("\n");
+        if(tr != null) {
+            dateLogContent.append(Log.getStackTraceString(tr)).append("\n");
+        }
         mExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    IO.write(dateLogContent, new File(fullPath), true);
+                    IO.write(dateLogContent.toString(), fullPath, true);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

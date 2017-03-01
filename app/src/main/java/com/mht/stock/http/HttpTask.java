@@ -9,19 +9,19 @@ import okhttp3.Request;
 /**
  * Created by mht on 2016/6/18.
  */
-public class Http {
+public class HttpTask {
 
     private ArrayList<HttpListener> mHttpListeners;
 
-    public Http setTimeout(long timeout) {
+    public HttpTask setTimeout(long timeout) {
         return this;
     }
 
-    public Http setHttps() {
+    public HttpTask setHttps() {
         return this;
     }
 
-    public Http addHttpListener(HttpListener httpListener) {
+    public HttpTask addHttpListener(HttpListener httpListener) {
         if(mHttpListeners == null) {
             mHttpListeners = new ArrayList<>();
         }
@@ -29,11 +29,11 @@ public class Http {
         return this;
     }
 
-    public Http request(Request request) {
+    public HttpTask request(Request request) {
         return this;
     }
 
-    public Http execute() {
+    public HttpTask execute() {
         return this;
     }
 

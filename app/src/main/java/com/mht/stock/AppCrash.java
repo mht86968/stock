@@ -3,8 +3,8 @@ package com.mht.stock;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.os.Environment;
 
+import com.mht.stock.storage.UserStorage;
 import com.mht.stock.util.FileUtils;
 import com.mht.stock.util.IO;
 
@@ -26,12 +26,12 @@ import java.util.Locale;
  */
 public class AppCrash implements Thread.UncaughtExceptionHandler {
 
-    private volatile static AppCrash mInstance;
+    private static AppCrash singleton;
 
     private Thread.UncaughtExceptionHandler mHandler;
 
     private boolean mInitialized;
-    private String  crashDir;
+    private File    crashDir;
     private String  versionName;
     private int     versionCode;
 
@@ -45,15 +45,15 @@ public class AppCrash implements Thread.UncaughtExceptionHandler {
      *
      * @return 单例
      */
-    public static AppCrash getInstance() {
-        if (mInstance == null) {
-            synchronized (AppCrash.class) {
-                if (mInstance == null) {
-                    mInstance = new AppCrash();
+    public static AppCrash instance() {
+        if(singleton == null) {
+            synchronized (UserStorage.class) {
+                if(singleton == null) {
+                    singleton = new AppCrash();
                 }
             }
         }
-        return mInstance;
+        return singleton;
     }
 
     /**
@@ -61,17 +61,11 @@ public class AppCrash implements Thread.UncaughtExceptionHandler {
      *
      * @return {@code true}: 成功<br>{@code false}: 失败
      */
-    public boolean init() {
+    public boolean init(AppCache appCache) {
         if (mInitialized) return true;
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            File baseCache = MyApplication.getApplication().getExternalCacheDir();
-            if (baseCache == null) return false;
-            crashDir = baseCache.getPath() + File.separator + "crash" + File.separator;
-        } else {
-            File baseCache = MyApplication.getApplication().getCacheDir();
-            if (baseCache == null) return false;
-            crashDir = baseCache.getPath() + File.separator + "crash" + File.separator;
-        }
+        if(appCache.getAppCache() == null) return false;
+        crashDir = appCache.getCasheCache();
+
         try {
             PackageInfo pi = MyApplication.getApplication().getPackageManager().getPackageInfo(MyApplication.getApplication().getPackageName(), 0);
             versionName = pi.versionName;
@@ -88,7 +82,7 @@ public class AppCrash implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(Thread thread, final Throwable throwable) {
         String now = new SimpleDateFormat("yy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-        final String fullPath = crashDir + now + ".txt";
+        final File fullPath = new File(crashDir, now + ".txt");
         if (!FileUtils.createOrExistsFile(fullPath)) return;
         new Thread(new Runnable() {
             @Override

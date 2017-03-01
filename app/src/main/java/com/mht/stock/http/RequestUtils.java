@@ -18,7 +18,7 @@ import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-public class HttpRequestUtils {
+public class RequestUtils {
 	private static final String TAG = "HttpUtils";
 
 	public static Request httpGet(String url, Map<String, Object> params) throws AppException {
@@ -31,7 +31,7 @@ public class HttpRequestUtils {
 					Object value = e.getValue();
 					urlBuffer.append(e.getKey());
 					urlBuffer.append("=");
-					urlBuffer.append(java.net.URLEncoder.encode(value == null ? "" : value.toString(), Constants.UTF8));
+					urlBuffer.append(URLEncoder.encode(value == null ? "" : value.toString(), Constants.UTF8));
 					urlBuffer.append("&");
 				}
 				urlBuffer.setLength(urlBuffer.length() - 1);

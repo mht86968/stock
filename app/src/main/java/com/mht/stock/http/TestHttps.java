@@ -1,5 +1,7 @@
 package com.mht.stock.http;
 
+import com.mht.stock.util.EncryptUtils;
+
 /**
  * Created by mht on 2016/5/17.
  */
@@ -209,6 +211,6 @@ public class TestHttps {
 //    }
 //
 //    private String md5Password(String password) {
-//        return com.mht.stock.util.MD5.getMD5Code("G" + password + "100");
+//        return EncryptUtils.encryptMD5ToString("G" + password + "100");
 //    }
 }
