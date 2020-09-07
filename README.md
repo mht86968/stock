@@ -6,11 +6,12 @@ git config --global user.name "Your Name"
 
 git
 ```sh
-git clone   克隆版本库
-git add .   添加所有改变
-git rm      删除文件
-git rm -rf  删除文件夹
-git diff    比较不同
+git clone       克隆版本库
+git add .       添加所有改变
+git rm          删除文件
+git rm -rf      删除文件夹
+git diff        比较不同
+git diff --stat 比较不同
 ```
 
 git 放弃本地修改 强制更新
